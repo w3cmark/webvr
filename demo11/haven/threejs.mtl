@@ -1,0 +1,359 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# :11.04.2016 17:49:23
+
+newmtl JZ2012_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2012_jz_d.jpg
+	map_Kd JZ2012_jz_d.jpg
+	map_Ks JZ2012_jz_s.jpg
+	map_Ke JZ2012_jz_e.jpg
+	map_bump Map__171.jpg
+
+newmtl JZ2030_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2030_jz_d.jpg
+	map_Kd JZ2030_jz_d.jpg
+	map_Ks JZ2030_jz_s.jpg
+	map_Ke JZ2030_jz_e.jpg
+	map_bump Map__300.jpg
+
+newmtl JZ2025_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2025_jz_d.jpg
+	map_Kd JZ2025_jz_d.jpg
+	map_Ks JZ2025_jz_s.jpg
+	map_Ke JZ2025_jz_e.jpg
+	#map_bump Map__290.jpg
+
+newmtl JZ2031_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2031_jz_d.jpg
+	map_Kd JZ2031_jz_d.jpg
+	map_Ks JZ2031_jz_s.jpg
+	map_Ke JZ2031_jz_e.jpg
+	map_bump Map__302.jpg
+
+newmtl JZ2029_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2029_jz_d.jpg
+	map_Kd JZ2029_jz_d.jpg
+	map_Ks JZ2029_jz_s.jpg
+	map_Ke JZ2029_jz_e.jpg
+	map_bump Map__298.jpg
+
+newmtl JZ2028_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2028_jz_d.jpg
+	map_Kd JZ2028_jz_d.jpg
+	map_Ks JZ2028_jz_s.jpg
+	map_Ke JZ2028_jz_e.jpg
+	map_bump Map__296.jpg
+
+newmtl JZ2027_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2027_jz_d.jpg
+	map_Kd JZ2027_jz_d.jpg
+	map_Ks JZ2027_jz_s.jpg
+	map_Ke JZ2027_jz_e.jpg
+	map_bump Map__294.jpg
+
+newmtl JZ2026_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2026_jz_d.jpg
+	map_Kd JZ2026_jz_d.jpg
+	map_Ks JZ2026_jz_s.jpg
+	map_Ke JZ2026_jz_e.jpg
+	map_bump Map__292.jpg
+
+newmtl JZ2023_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2023_jz_d.jpg
+	map_Kd JZ2023_jz_d.jpg
+	map_Ks JZ2023_jz_s.jpg
+	map_Ke JZ2023_jz_e.jpg
+	map_bump Map__286.jpg
+
+newmtl JZ2010_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2010_jz_d.jpg
+	map_Kd JZ2010_jz_d.jpg
+	map_Ks JZ2010_jz_s.jpg
+	map_Ke JZ2010_jz_e.jpg
+	map_bump Map__162.jpg
+
+newmtl JZ2024_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2024_jz_d.jpg
+	map_Kd JZ2024_jz_d.jpg
+	map_Ks JZ2024_jz_s.jpg
+	map_Ke JZ2024_jz_e.jpg
+	map_bump Map__288.jpg
+
+newmtl JZ2013_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2013_jz_d.jpg
+	map_Kd JZ2013_jz_d.jpg
+	map_Ks JZ2013_jz_s.jpg
+	map_Ke JZ2013_jz_e.jpg
+	map_bump Map__278.jpg
+
+newmtl JZ2006_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2006_jz_d.jpg
+	map_Kd JZ2006_jz_d.jpg
+	map_Ks JZ2006_jz_s.jpg
+	map_Ke JZ2006_jz_e.jpg
+	map_bump Map__33.jpg
+
+newmtl JZ2022_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2022_jz_d.jpg
+	map_Kd JZ2022_jz_d.jpg
+	map_Ks JZ2022_jz_s.jpg
+	map_Ke JZ2022_jz_e.jpg
+	map_bump Map__284.jpg
+
+newmtl JZ2009_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2009_jz_d.jpg
+	map_Kd JZ2009_jz_d.jpg
+	map_Ks JZ2009_jz_s.jpg
+	map_Ke JZ2009_jz_e.jpg
+	#map_bump Map__160.jpg
+
+newmtl JZ2011_jz_l_3
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2011_jz_d.jpg
+	map_Kd JZ2011_jz_d.jpg
+	map_Ks JZ2011_jz_s.jpg
+	map_Ke JZ2011_jz_e.jpg
+	map_bump Map__169.jpg
+
+newmtl JZ2007_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2007_jz_d.jpg
+	map_Kd JZ2007_jz_d.jpg
+	map_Ks JZ2007_jz_s.jpg
+	map_Ke JZ2007_jz_e.jpg
+	map_bump Map__39.jpg
+
+newmtl JZ2008_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2008_jz_d.jpg
+	map_Kd JZ2008_jz_d.jpg
+	map_Ks JZ2008_jz_s.jpg
+	map_Ke JZ2008_jz_e.jpg
+	map_bump Map__158.jpg
+
+newmtl JZ2016_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2016_jz_d.jpg
+	map_Kd JZ2016_jz_d.jpg
+	map_Ks JZ2016_jz_s.jpg
+	map_Ke JZ2016_jz_e.jpg
+	map_bump Map__280.jpg
+
+newmtl JZ2042_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2042_jz_d.jpg
+	map_Kd JZ2042_jz_d.jpg
+	map_Ks JZ2042_jz_s.jpg
+	map_Ke JZ2042_jz_e.jpg
+	map_bump Map__280.jpg
+
+newmtl JZ2021_jz_l_1
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.3600 0.3600 0.3600
+	Ke 0.0000 0.0000 0.0000
+	map_Ka JZ2021_jz_d.jpg
+	map_Kd JZ2021_jz_d.jpg
+	map_Ks JZ2021_jz_s.jpg
+	map_Ke JZ2021_jz_e.jpg
+	map_bump Map__282.jpg

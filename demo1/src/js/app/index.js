@@ -61,7 +61,7 @@ document.body.appendChild(renderer.domElement);
 var scene = new THREE.Scene();
 
 // Create a three.js camera.
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+var camera = new THREE.PerspectiveCamera(85, window.innerWidth / window.innerHeight, 0.1, 10000);
 
 // Apply VR headset positional data to camera.
 var controls = new THREE.VRControls(camera);
@@ -111,8 +111,16 @@ function onTextureLoaded(texture) {
 
 // Create 3D objects.
 var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-var material = new THREE.MeshNormalMaterial();
+for ( var i = 0; i < geometry.faces.length; i += 2 ) {
+
+    var hex = Math.random() * 0xffffff;
+    geometry.faces[ i ].color.setHex( hex );
+    geometry.faces[ i + 1 ].color.setHex( hex );
+
+}
+var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.FaceColors});
 var cube = new THREE.Mesh(geometry, material);
+cube.position = new THREE.Vector3(0,0,0);
 
 // Position cube mesh to be right in front of you.
 cube.position.set(0, controls.userHeight, -1);
@@ -134,6 +142,7 @@ function animate(timestamp) {
 
   //立方体的旋转
   cube.rotation.y += delta * 0.0006;
+  cube.rotation.x += delta * 0.0005;
 
   // Update VR headset position and apply to camera.
   //更新获取HMD的信息
@@ -181,5 +190,5 @@ function setStageDimensions(stage) {
   scene.add(skybox);
 
   // Place the cube in the middle of the scene, at user height.
-  cube.position.set(0, controls.userHeight, 0);
+  // cube.position.set(0, controls.userHeight, 0);
 }
