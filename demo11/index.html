@@ -57,10 +57,12 @@ div#canvas-frame {
     color: #fff;
 }
 .pic1,.pic2,.pic3{
-    position:absolute;display:none;width:10px;height:10px;
-    border-radius: 10px;
-    border: 5px solid rgba(255,255,255,0.7);
-    margin-left:-5px;margin-top:-5px;
+    position:absolute;display:none;
+    width:5px;
+    height:5px;
+    border-radius: 5px;
+    border: 4px solid rgba(255,255,255,0.7);
+    margin-left:-2.5px;margin-top:-2.5px;
     -webkit-transform:translate3d(0,0,0);
 }
 .pic1{
@@ -72,9 +74,62 @@ div#canvas-frame {
 .pic3{
     left:50%;top:50%;
 }
+.loading{
+    position: absolute;
+    z-index: 100;
+    color: #fff;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    display: none;
+}
+.Jvideo{
+    position: absolute;
+    z-index: 100;
+    width: 50%;
+    left: 50%;
+    top: 50%;
+    height: 50%;
+    background: #000;
+    display: none;
+    transform:translate(-50%, -50%);
+    -webkit-transform:translate(-50%, -50%);
+    display: none;
+}
+.Jvideo::after{
+    content: '';
+    width: 30px;
+    height: 1px;
+    position: absolute;
+    z-index: 101;
+    right: -30px;
+    top: 0;
+    background: #fff;
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+}
+.Jvideo::before{
+    content: '';
+    width: 30px;
+    height: 1px;
+    position: absolute;
+    z-index: 101;
+    right: -30px;
+    top: 0;
+    background: #fff;
+    transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+}
+video{
+    display: none;
+}
 </style>
 </head>
 <body>
+<div class="loading">Loading...</div>
 <div class="pic1"></div>
 <div class="pic2"></div>
 <div class="pic3"></div>
@@ -84,6 +139,9 @@ div#canvas-frame {
 </div>
 <div class="info" id="info"></div>
 <div id="canvas-frame"></div>
+
+
+<video src="http://v.nie.netease.com/nie/2016/0531/75551bae417ecd7cd98023708a8f04f2qt.mp4" id="myvideo"></video>
 <script type="text/javascript" src="https://nie.res.netease.com/comm/js/zepto(mixNIE).last.js"></script>
 <script charset="utf-8" type="text/javascript" src="../js/three.min.js"></script>
 <script charset="utf-8" type="text/javascript" src="../js/loaders/MTLLoader.js"></script>
