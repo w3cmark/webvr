@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta charset="utf-8">
-<link rel="dns-prefetch" href="http://res.nie.netease.com">
+<link rel="dns-prefetch" href="https://nie.res.netease.com">
 <style type="text/css">
 *{
     margin: 0;
@@ -40,7 +40,7 @@ div#canvas-frame {
 }
 .btn a{
     display: inline-block;
-    width: 90px;
+    width: 120px;
     line-height: 30px;
     height: 30px;
     color: #fff;
@@ -123,8 +123,26 @@ div#canvas-frame {
     transform:rotate(45deg);
     -webkit-transform:rotate(45deg);
 }
-video{
-    display: none;
+.ewm{
+    width: 163px;
+    height: 163px;
+    background: url(img/ewm.png);
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    margin: -180px 0 0 -80px;
+}
+
+@media screen and (max-width:450px) and (orientation:portrait ){
+    .ewm{
+        display: none;
+    }
+}
+@media screen and (max-width:740px) and (orientation:landscape){
+    .ewm{
+        display: none;
+    }
 }
 </style>
 </head>
@@ -134,30 +152,30 @@ video{
 <div class="pic2"></div>
 <div class="pic3"></div>
 <div class="btn">
-    <a href="javascript:void(0);">正常模式</a>
-    <a href="javascript:void(0);">VR模式</a>
+    <a href="javascript:void(0);">Normal Mode</a>
+    <a href="javascript:void(0);">VR Mode</a>
 </div>
-<div class="info" id="info"></div>
-<div id="canvas-frame"></div>
+<div class="ewm"></div>
+<div id="canvas-frame">
+<!-- <canvas id="main-canvas"></canvas> -->
+</div>
 
-
-<video src="http://v.nie.netease.com/nie/2016/0531/75551bae417ecd7cd98023708a8f04f2qt.mp4" id="myvideo"></video>
 <script type="text/javascript" src="https://nie.res.netease.com/comm/js/zepto(mixNIE).last.js"></script>
-<script charset="utf-8" type="text/javascript" src="../js/three.min.js"></script>
-<script charset="utf-8" type="text/javascript" src="../js/loaders/MTLLoader.js"></script>
-<script charset="utf-8" type="text/javascript" src="../js/loaders/OBJLoader.js"></script>
-<script charset="utf-8" type="text/javascript" src="../js/loaders/DDSLoader.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/three.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/loaders/MTLLoader.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/loaders/OBJLoader.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/loaders/DDSLoader.js"></script>
 
-<script charset="utf-8" type="text/javascript" src="../js/controls/DeviceOrientationControls.js"></script>
-<!-- <script charset="utf-8" type="text/javascript" src="../js/controls/OrbitControls.js"></script> -->
-<script charset="utf-8" type="text/javascript" src="../js/controls/StereoEffect.js"></script>
-<script charset="utf-8" type="text/javascript" src="../js/controls/VRControls.js"></script>
-<script charset="utf-8" type="text/javascript" src="../js/controls/VREffect.js"></script>
-<script charset="utf-8" type="text/javascript" src="../js/controls/webvr-polyfill.js"></script>
-<!-- <script charset="utf-8" type="text/javascript" src="../js/controls/webvr-manager.js"></script> -->
-<!-- <script charset="utf-8" type="text/javascript" src="../js/stats.js"></script> -->
-<script charset="utf-8" type="text/javascript" src="../js/Tween.js"></script>
-<script charset="utf-8" type="text/javascript" src="3d_math.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/controls/DeviceOrientationControls.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/controls/OrbitControls.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/controls/StereoEffect.js"></script>
+<!-- <script charset="utf-8" type="text/javascript" src="js/controls/VRControls.js"></script> -->
+<!-- <script charset="utf-8" type="text/javascript" src="js/controls/VREffect.js"></script> -->
+<!-- <script charset="utf-8" type="text/javascript" src="js/controls/webvr-polyfill.js"></script> -->
+<!-- <script charset="utf-8" type="text/javascript" src="js/controls/webvr-manager.js"></script> -->
+<!-- <script charset="utf-8" type="text/javascript" src="js/stats.js"></script> -->
+<script charset="utf-8" type="text/javascript" src="js/Tween.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/3d_math.js"></script>
 <script charset="utf-8" type="text/javascript" src="index.js"></script>
 
 </body>

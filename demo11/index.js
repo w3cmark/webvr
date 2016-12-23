@@ -1,13 +1,18 @@
 function WBGL(options){
     this.options = options || {};
     this.canvas = document.getElementById(this.options.canvas);
+    // this.canvas.width = window.innerWidth;
+    // this.canvas.height = window.innerHeight;
+    // this.canvas.style.background = '#000';
     if(!this.canvas){
         return;
     }
     this.global = {
         w: this.canvas.clientWidth,
         h: this.canvas.clientHeight,
-        renderer: new THREE.WebGLRenderer(),
+        renderer: new THREE.WebGLRenderer({
+                    antialias : true
+                }),
         scene: new THREE.Scene(),
         raycaster: new THREE.Raycaster(),
         mouse: new THREE.Vector2(),
@@ -17,10 +22,10 @@ function WBGL(options){
             // ["plan1","http://test.nie.163.com/three_tech/resource/part1/plan_1.png",1024,256,-170,50,-2000,1],
             // ["air","http://test.nie.163.com/three_tech/resource/part1/airplane_1.png",512,512,150,100,-3000,1],
             // ["star1","http://test.nie.163.com/three_tech/resource/part1/star_1.png",2317,979,150,0,-4500,1],
-            // ["dot1","../img/dot.png",40,40,750,-20,1000,1],
-            ["play","../img/btn_video_play.png", 50, 50, 15, 200, 200, 1],
-            ["light","../img/light.png",1152, 1024, 200, 50, -7500, 1]
-            // ["part1_bg","../img/part1_bg.jpg",2048*1.5,1024*1.5,0,0,-18000,1]
+            // ["dot1","img/dot.png",40,40,750,-20,1000,1],
+            ["play","img/btn_video_play.png", 80, 80, -2000, 316, 0, 1],
+            ["light","img/light.png",1152, 1024, 200, 50, -7500, 1]
+            // ["part1_bg","img/part1_bg.jpg",2048*1.5,1024*1.5,0,0,-18000,1]
         ],
         haven: '',
         effect: '',
@@ -30,8 +35,8 @@ function WBGL(options){
         isFocus: false,
         focusSet: '',
         sky: '',
-        videoEle: document.getElementById("myvideo"),
-        videoCanvas: '',
+        videoEle: this.options.videoEle,
+        videoMesh: '',
         dot: []
     };
     // _this = this;
@@ -44,91 +49,68 @@ WBGL.prototype = {
         self.global.renderer.setSize(self.global.w, self.global.h);
         self.canvas.appendChild(self.global.renderer.domElement);
         // self.global.renderer.setClearColor(0xFFFFFF, 1.0);
+        // self.global.renderer = new THREE.WebGLRenderer({
+        //     canvas: self.canvas,
+        //     antialias : true
+        // });
 
         self.initCamera();
 
         // self.global.controls = new THREE.DeviceOrientationControls( self.global.camera );
+        // console.log(self.global.camera)
         
         
         // self.global.controls.target.set(
-        //   self.global.camera.position.x,
-        //   self.global.camera.position.y,
-        //   self.global.camera.position.z
+        //   parseInt(self.global.camera.position.x),
+        //   parseInt(self.global.camera.position.y),
+        //   parseInt(self.global.camera.position.z)
         // );
         // self.global.controls.noPan = true;
         // self.global.controls.noZoom = true;
+        // self.global.camera.lookAt(new THREE.Vector3(0,0,0));
 
-        // self.global.controls = new THREE.VRControls(self.global.camera);
-        // if("onorientationchange" in window){
-            self.global.controls = new THREE.VRControls(self.global.camera);
-            if(self.global.isVR){
-                // self.global.effect = new THREE.StereoEffect( self.global.renderer );
-                self.global.effect = new THREE.VREffect( self.global.renderer );
-                self.global.effect.setSize( self.global.w, self.global.h );
-                // self.global.manager = new WebVRManager(self.global.renderer, self.global.effect, {hideButton: false});
-
+        function setOrientationControls(e){
+            console.log(e)
+            if (e.alpha) {
+                self.global.controls = new THREE.DeviceOrientationControls(self.global.camera, true);
+                self.global.controls.connect();
+                self.global.controls.update();
             }
-    //     }else{//pc
-    //         self.global.controls = new THREE.OrbitControls(self.global.camera, self.canvas);
-    //         self.global.controls.maxPolarAngle=1.8;
-    //         self.global.controls.minPolarAngle=1.3;
-    //         self.global.controls.enableDamping=true;
-    //         self.global.controls.enableKeys=false;
-    //         self.global.controls.enablePan=false;
-    //         self.global.controls.dampingFactor = 0.1;
-    //         self.global.controls.rotateSpeed=0.1;
-    // //      controls.enabled = false;
-    //         self.global.controls.minDistance=1000;
-    //         self.global.controls.maxDistance=3000;
-    //     }
+            window.removeEventListener('deviceorientation', setOrientationControls, true);
+        }
+        window.addEventListener('deviceorientation', setOrientationControls, true);
+
+        if(self.global.isVR){
+            self.global.effect = new THREE.StereoEffect( self.global.renderer );
+        }else{
+            self.global.controls = new THREE.OrbitControls(self.global.camera, self.global.renderer.domElement);
+        }
         
         self.loadMtlObj();
 
-        
-        
         self.addPlanes();
 
-        
-
         self.global.sky = self.addSkyBox(self.global.scene);
-        var obj1 = self.createSpriteMaterial("dot1", -350,45, 380, 60),
-            obj1_h = self.createSpriteMaterial("dot1_h", -350,45, 381, 0),
-            obj2 = self.createSpriteMaterial("dot2", 350,40, 380, 60),
-            obj2_h = self.createSpriteMaterial("dot2_h", 350,40, 381, 0);
-        self.global.dot.push(obj1);
-        self.global.dot.push(obj1_h);
-        obj1_h.visible = false;
-        self.global.dot.push(obj2);
-        self.global.dot.push(obj2_h);
-        obj2_h.visible = false;
-        self.global.scene.add(obj1);
-        self.global.scene.add(obj1_h);
-        self.global.scene.add(obj2);
-        self.global.scene.add(obj2_h);
-
-        self.clickPointLoop(self.global.dot[0],[1,1.5]);
-        self.clickPointLoop(self.global.dot[1],[60,70]);
-        self.clickPointLoop(self.global.dot[3],[60,70]);
-        // new TWEEN.Tween( self.global.dot[0].scale )
-        //     .to({x:1.5,y:1.5,z:1.5}, 1500 )
-        //     .repeat(Infinity)
-        //     // .yoyo( true )
-        //     .easing( TWEEN.Easing.Cubic.InOut )
-        //     .start();
-
-        console.log(self.global.dot)
+        
+        // console.log(self.global.dot)
         
         self.initLight();
 
         window.addEventListener( 'resize', function(){
             self.onresize();
         }, false );
-
-        self.createVideo('video',0,0,300,600, 400);
+        self.createVideo();
+        // self.createVideo(0,600);
+    },
+    initCamera: function(){
+        var self = this;
+        self.global.camera = new THREE.PerspectiveCamera(45, self.global.w / self.global.h, 1, 500000);
+        self.global.camera.position.set(0,250,1200);
+        self.global.camera.lookAt(new THREE.Vector3(0,0,0));
     },
     clickPointLoop:function (point,scale,time,delay){
         var self = this;
-        console.log(self.global.isFocus)
+        // console.log(self.global.isFocus)
         if(self.global.isFocus){return}
         time=time&&time!=0?time:1000;
         delay=delay?delay:0;
@@ -157,19 +139,7 @@ WBGL.prototype = {
 
         self.global.renderer.setSize( window.innerWidth, window.innerHeight );
     },
-    initCamera: function(){
-        var self = this;
-        self.global.camera = new THREE.PerspectiveCamera(45, self.global.w / self.global.h, 1, 500000);
-        self.global.camera.position.x = 100;
-        self.global.camera.position.y = 400;
-        self.global.camera.position.z = 2000;
-        // self.global.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
-        // self.global.camera.target = new THREE.Vector3( 0, 0, 0 );
-        // self.global.camera.up.x = 0;
-        // self.global.camera.up.y = 1;
-        // self.global.camera.up.z = 0;
-        self.global.camera.lookAt(new THREE.Vector3(0,0,-1000000));
-    },
+    
     creatObj : function(options){
         var self = this;
         var loader = new THREE.TextureLoader();
@@ -212,6 +182,8 @@ WBGL.prototype = {
             //plane.visible=false;
             if(planeSet[0] == 'play'){
                 self.global.dot.push(plane);
+                plane.visible = false;
+                plane.rotation.y= 1.6;
             }
             
             self.global.scene.add(plane);
@@ -291,7 +263,7 @@ WBGL.prototype = {
                 });
                 object.emissive=0x00ffff;//自发光颜色
                 object.ambient=0x00ffff;//环境光颜色
-                object.rotation.x= 0.2;//x轴方向旋转角度
+                object.rotation.x= 0;//x轴方向旋转角度
                 object.position.y = 0;//位置坐标y
                 object.position.z = 0;//位置坐标z
                 object.scale.x=0.01;//缩放级别
@@ -311,17 +283,37 @@ WBGL.prototype = {
     },
     openAni: function(){
         var self = this;
-        self.global.camera.lookAt( new THREE.Vector3(0,0,-20000) );
+        // self.global.camera.lookAt( new THREE.Vector3(0,0,-20000) );
         new TWEEN.Tween( self.global.haven.scale )
             .to({x:1,y:1,z:1}, 500 )
             .easing(TWEEN.Easing.Quadratic.InOut)
-            .delay(2000)
+            .delay(1000)
             .start();
         // self.global.haven.rotation.y += 0.05;
         new TWEEN.Tween( self.global.haven.rotation )
-            .to({x:0,y:4.5,z:0}, 500 )
+            .to({x:0,y:4.8,z:0}, 500 )
             .easing(TWEEN.Easing.Quadratic.InOut)
-            .delay(2000)
+            .delay(1000)
+            .onComplete(function(){
+                var obj1 = self.createSpriteMaterial("dot1", -340,60, 280, 60),
+                    obj1_h = self.createSpriteMaterial("dot1_h", -340,60, 281, 0),
+                    obj2 = self.createSpriteMaterial("dot2", 340,60, 280, 60),
+                    obj2_h = self.createSpriteMaterial("dot2_h", 340,60, 281, 0);
+                self.global.dot.push(obj1);
+                self.global.dot.push(obj1_h);
+                obj1_h.visible = false;
+                self.global.dot.push(obj2);
+                self.global.dot.push(obj2_h);
+                obj2_h.visible = false;
+                self.global.scene.add(obj1);
+                self.global.scene.add(obj1_h);
+                self.global.scene.add(obj2);
+                self.global.scene.add(obj2_h);
+                self.global.dot[0].visible=true;
+                // self.clickPointLoop(self.global.dot[0],[1,1.5]);
+                // self.clickPointLoop(self.global.dot[1],[60,70]);
+                // self.clickPointLoop(self.global.dot[3],[60,70]);
+            })
             .start();
         $('.loading').hide();
         if(self.global.isVR){
@@ -333,9 +325,10 @@ WBGL.prototype = {
             $('.pic2').hide();
             $('.pic3').show();
         }
+        
     },
     addSkyBox: function(scene){
-        var path = "../img/";
+        var path = "img/";
         var format = '.jpg';
         var urls = [
                 path + 'px' + format, path + 'nx' + format,
@@ -410,29 +403,25 @@ WBGL.prototype = {
         obj.name = name;
         return obj;
     },
-    createVideo: function(){
+    createVideo: function(w,h){
         var self = this;
-        self.global.videoCanvas = document.createElement("canvas");
-        self.global.videoCanvas.width = w;
-        self.global.videoCanvas.height = h;
-        
-    },
-    playVideo: function(myvideo, canvas, w, h, x, y, z){
-        var self = this;
-        if (myvideo.paused) {
-            return;
-        }
-        canvas.getContext("2d").drawImage(myvideo,0,0,w,h);
-        var v = new THREE.SpriteMaterial( {
-            map: new THREE.CanvasTexture( canvas ),
-            blending: THREE.AdditiveBlending,
-            overdraw:false,
-            depthWrite:false
-        } )
+        // var geometry = new THREE.SphereBufferGeometry( 500, 500, 40 ).toNonIndexed();
+        var geometry = new THREE.PlaneGeometry( 740, 416, 1, 1);
+        geometry.scale( 2, 2, 2 );
 
-        obj = new THREE.Sprite(v);
-        obj.position.set( x, y, z );
-        self.global.scene.add(obj);
+        // console.log(self.global.videoEle)
+
+        var texture = new THREE.VideoTexture(self.global.videoEle );
+        texture.minFilter = THREE.LinearFilter;
+        texture.format = THREE.RGBFormat;
+
+        var material   = new THREE.MeshBasicMaterial( { map : texture } );
+
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.set(-740*4, 416, 1);
+        mesh.rotation.y= 1.6;
+        self.global.scene.add( mesh );
+        self.global.videoMesh = mesh;
     },
     inFocus: function(obj){
         var self = this;
@@ -444,12 +433,12 @@ WBGL.prototype = {
         if(obj.name == 'dot1'){
             self.global.dot[2].visible=true;
             new TWEEN.Tween( self.global.dot[2].scale )
-                .to({x:60,y:60,z:60}, 1500 )
+                .to({x:80,y:80,z:80}, 1500 )
                 .start();
         }else if(obj.name == 'dot2'){
             self.global.dot[4].visible=true;
             new TWEEN.Tween( self.global.dot[4].scale )
-                .to({x:60,y:60,z:60}, 1500 )
+                .to({x:80,y:80,z:80}, 1500 )
                 .start();
         }else if(obj.name == 'play'){
             new TWEEN.Tween( obj.scale )
@@ -463,12 +452,25 @@ WBGL.prototype = {
         self.global.focusSet = setTimeout(function(){
             console.log('in 1.5s');
             if(obj.name == 'dot1'){
-                self.changeLookat(1, 5);
+                self.changeLookat(1, 5.3);
             }else if(obj.name == 'dot2'){
-                self.changeLookat(1, 3.8);
-            }else if(obj.name == 'play'){
-                
-                self.global.videoEle.play();
+                self.changeLookat(1, 4);
+            }else if(obj.name == 'play'){//播放视频
+                    // self.createVideo();
+                    obj.visible = false;
+                    self.global.videoEle.play();
+                    // self.global.camera.position.set(1224,93,-65);
+                    // new TWEEN.Tween( self.global.camera.rotation )
+                    //     .to({y:-0.1}, 1000 )
+                    //     .start();
+                    // console.log(self.global.videoMesh.position)
+                    // self.global.camera.lookAt( self.global.videoMesh.position);
+                    // self.global.controls.target.set(
+                    //   parseInt(self.global.videoMesh.position.x),
+                    //   parseInt(self.global.videoMesh.position.y),
+                    //   parseInt(self.global.videoMesh.position.z)
+                    // );
+                    // alert(1);
             }
             
         },1500);
@@ -478,33 +480,37 @@ WBGL.prototype = {
         var self = this;
         if(!self.global.isFocus){return}
         self.global.isFocus = false;
-        clearTimeout(self.global.focusSet);
-        // TWEEN.removeAll();
-        new TWEEN.Tween( self.global.dot[2].scale )
-            .to({x:0,y:0,z:0}, 800 )
-            .onComplete(function(){
-                self.global.dot[2].visible = false;
-            })
-            .start();
-        new TWEEN.Tween( self.global.dot[4].scale )
-            .to({x:0,y:0,z:0}, 800 )
-            .onComplete(function(){
-                self.global.dot[4].visible = false;
-            })
-            .start();
-        new TWEEN.Tween( self.global.dot[0].scale )
-            .to({x:1,y:1,z:1}, 800 )
-            .start();
-        self.changeLookat(0);
-        self.clickPointLoop(self.global.dot[0],[1,1.5]);
-        self.clickPointLoop(self.global.dot[1],[60,70]);
-        self.clickPointLoop(self.global.dot[3],[60,70]);
+        setTimeout(function(){
+            
+            clearTimeout(self.global.focusSet);
+            TWEEN.removeAll();
+            new TWEEN.Tween( self.global.dot[2].scale )
+                .to({x:0,y:0,z:0}, 800 )
+                .onComplete(function(){
+                    self.global.dot[2].visible = false;
+                })
+                .start();
+            new TWEEN.Tween( self.global.dot[4].scale )
+                .to({x:0,y:0,z:0}, 800 )
+                .onComplete(function(){
+                    self.global.dot[4].visible = false;
+                })
+                .start();
+            new TWEEN.Tween( self.global.dot[0].scale )
+                .to({x:1,y:1,z:1}, 800 )
+                .start();
+            self.changeLookat(0);
+            self.clickPointLoop(self.global.dot[0],[1,1.5]);
+            self.clickPointLoop(self.global.dot[1],[80,90]);
+            self.clickPointLoop(self.global.dot[3],[80,90]);
+        },1000)
+        
     },
     changeLookat: function(n, r_y){
         var self = this;
         if(n === 1){
             new TWEEN.Tween( self.global.haven.scale )
-                .to({x:3,y:3,z:3}, 1000 )
+                .to({x:2,y:2,z:2}, 1000 )
                 .start();
             new TWEEN.Tween( self.global.haven.rotation )
                 .to({x:0,y:r_y,z:0}, 1000 )
@@ -514,30 +520,34 @@ WBGL.prototype = {
                 .to({x:1,y:1,z:1}, 800 )
                 .start();
             new TWEEN.Tween( self.global.haven.rotation )
-                .to({x:0,y:4.5,z:0}, 800 )
+                .to({x:0,y:4.8,z:0}, 800 )
                 .start();
         }
         
     },
     animation: function(){
         var self = this;
-        
-        self.playVideo(self.global.videoEle, self.global.videoCanvas, 600, 400, 0,0,400);
+        // var r = Date.now() * 0.0005;
+        // self.global.haven.position.x = 700 * Math.cos( r );
+        // self.global.haven.position.z = 700 * Math.sin( r );
+        // self.global.haven.position.y = 700 * Math.sin( r );
         if(!self.global.isFocus){
             // self.global.haven.rotation.y += 0.001;
             // self.global.sky.mesh.rotation.y += 0.0005;
-            // var newCameraPos=Math3D.getRotateAxis2d({
-            //         x:self.global.camera.position.x,
-            //         y:self.global.camera.position.z
-            //     },-0.001,0);
-            //     self.global.camera.position.x=newCameraPos.x;
-            //     self.global.camera.position.z=newCameraPos.y;
+            var newCameraPos=Math3D.getRotateAxis2d({
+                    x:self.global.camera.position.x,
+                    y:self.global.camera.position.z
+                },-0.001,0);
+                self.global.camera.position.x=newCameraPos.x;
+                self.global.camera.position.z=newCameraPos.y;
             
-            //     self.global.camera.lookAt(self.global.scene.position);
+                self.global.camera.lookAt(self.global.haven.position);
         }
         
         self.global.controls.update();
-        // var cx = self.global.camera.rotation.x.toFixed(2);
+        // self.global.camera.rotation.x = self.global.camera.rotation.x + 0.01;
+        // console.log(self.global.camera.rotation)
+        // self.global.camera.rotation.z -= 1;
         // var cy = self.global.camera.rotation.y.toFixed(2);
         // var cz = self.global.camera.rotation.z.toFixed(2);
         // $('#info').html(cx+'_'+cy+'_'+cz);
@@ -554,13 +564,12 @@ WBGL.prototype = {
         }
 
         if(self.global.isVR){
-            // self.global.effect.render(self.global.scene, self.global.camera);
             self.global.effect.render(self.global.scene, self.global.camera);
-
         }else{
             self.global.renderer.render(self.global.scene, self.global.camera);
         }
-        self.global.camera.lookAt( new THREE.Vector3(0,0,-20000) );
+        // self.global.camera.lookAt( new THREE.Vector3(0,0,-20000) );
+        // self.global.camera.lookAt(new THREE.Vector3(0,0,0));
         TWEEN.update();
         requestAnimationFrame(function(){
             self.animation();
@@ -569,6 +578,15 @@ WBGL.prototype = {
 }
 
 var $btn = $('.btn a');
+var wbGLd;
+var videoEle = document.createElement( 'video' );
+// videoEle.width = w;
+// videoEle.height = h;
+// self.global.videoEle.loop = true;
+videoEle.muted = true;
+videoEle.src = "data/75551bae417ecd7cd98023708a8f04f2qt.mp4";
+videoEle.setAttribute( 'webkit-playsinline', 'webkit-playsinline' );
+videoEle.setAttribute( 'playsinline', 'playsinline' );
 $btn.on('click', function(){
     var $this = $(this),
         isvr = false;
@@ -580,9 +598,17 @@ $btn.on('click', function(){
         alert('您的设备不支持VR模式！');
     }
     $this.parent().hide();
+    $('.ewm').hide();
     $('.loading').show();
-    new WBGL({
+    videoEle.play();
+    setTimeout(function(){
+        videoEle.pause();
+        videoEle.muted = false;
+    },500);
+    wbGLd=new WBGL({
         canvas: 'canvas-frame',
-        isVR: isvr
+        isVR: isvr,
+        videoEle: videoEle
     })
 })
+
