@@ -195,7 +195,7 @@ WBGL.prototype = {
         // self.global.light.position.set(100, 100, 200);
         self.global.scene.add(light);
 
-        var directionalLight = new THREE.DirectionalLight( 0xffffff );
+        var directionalLight = new THREE.DirectionalLight( 0xffffff,5 );
         directionalLight.position.set( -5, 5, 5).normalize();
         self.global.scene.add( directionalLight );
     },
